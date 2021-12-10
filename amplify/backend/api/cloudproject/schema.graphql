@@ -6,7 +6,7 @@ type Event
       { allow: groups, groups: ["Admin"] }
       # allow all authenticated users to view events
       { allow: private, operations: [read] }
-      # allow all guest users (not authenticated) to view booeventsks
+      # allow all guest users (not authenticated) to view events
       { allow: public, operations: [read] }
     ]
   ) {
@@ -17,13 +17,11 @@ type Event
   author: String
   featured: Boolean
   price: Float
-  orders: [EventOrder] @connection(keyName: "byEvent", fields: ["id"])
+  orders: [EventOrder] @hasMany
 }
 
 type EventOrder
   @model(queries: null, subscriptions: null)
-  @key(name: "byEvent", fields: ["event_id", "order_id"])
-  @key(name: "byOrder", fields: ["order_id", "event_id"])
   @auth(
     rules: [
       # allow admins to create eventorders for customers by using customer email in lambda
@@ -34,8 +32,8 @@ type EventOrder
   id: ID!
   event_id: ID!
   order_id: ID!
-  event: Event @connection(fields: ["event_id"])
-  order: Order @connection(fields: ["order_id"])
+  event:ID! @index(name: "byEvent", sortKeyFields: ["event_id"])
+  order:ID! @index(name: "byOrder", sortKeyFields: ["order_id"])
 }
 
 type Order
@@ -48,17 +46,17 @@ type Order
       { allow: groups, groups: ["Admin"] }
     ]
   )
-  @key(name: "byUser", fields: ["user"]) {
+  {
   id: ID!
   user: String!
   date: String
   total: Float
-  events: [EventOrder] @connection(keyName: "byOrder", fields: ["id"])
-}
+  events: String! @index(name: "byEvent", sortKeyFields: ["id"])
+  }
 
-enum OrderStatus {
-  SUCCESS
-  FAILED
+ enum OrderStatus {
+  success
+  failed
 }
 
 input CartItem {

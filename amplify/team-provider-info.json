@@ -15,6 +15,16 @@
       "auth": {
         "cloudprojecta299870c": {},
         "true": {}
+      },
+      "function": {
+        "createOrder": {
+          "deploymentBucketName": "amplify-amplify9fa8dabd71014-staging-220936-deployment",
+          "s3Key": "amplify-builds/createOrder-6f32474b343948793269-build.zip"
+        },
+        "processPayment": {
+          "deploymentBucketName": "amplify-amplify9fa8dabd71014-staging-220936-deployment",
+          "s3Key": "amplify-builds/processPayment-4e5057324c326169474f-build.zip"
+        }
       }
     }
   }
