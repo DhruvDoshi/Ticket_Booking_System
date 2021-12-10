@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "cloudproject",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "/Users/dhruv/Documents/Education/Dalhousie/Semester 3/CSCI5409/Project/code/cloudproject/amplify/backend/api/cloudproject/schema.graphql",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authcloudprojecta299870c"
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "API_KEY",
+        "expirationTime": 365,
+        "apiKeyExpirationDate": "2022-12-10T00:20:38.521Z",
+        "keyDescription": "api key for the guest user acces for the events"
+      }
+    ]
+  }
+}
